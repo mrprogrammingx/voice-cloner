@@ -1,0 +1,11 @@
+{
+  "voice": "samples/ref_480.wav",
+  "model": "vc",
+  "seed": 1,
+  "max_chars": 250,
+  "sentence_pause": 0.35,
+  "paragraph_pause": 0.8,
+  "pronunciations": "pronunciations.json",
+  "output_dir": "output",
+  "mp3": true
+}

@@ -11,6 +11,7 @@ import soundfile as sf
 import torch
 
 from .audio_utils import AudioError, convert_to_wav, export_mp3, validate_reference
+from .config import load_config
 from .main import _parse_regen
 from .pipeline import assemble, generate_chunks
 from .text_utils import TextError, load_pronunciations, normalize_text, split_into_chunks
@@ -100,7 +101,11 @@ def generate(script, selected, upload, start, length, kind, seed, max_chars,
 
 def build_ui():
     voices = list_voices()
-    default = "ref_480.wav" if "ref_480.wav" in voices else (voices[0] if voices else None)
+    try:
+        saved = Path(load_config()["voice"]).name
+    except Exception:
+        saved = None
+    default = saved if saved in voices else (voices[0] if voices else None)
 
     with gr.Blocks(title="Voice Narrator", analytics_enabled=False) as demo:
         gr.Markdown("# Voice Narrator\nRuns entirely on this Mac. Nothing is sent to any service.")
