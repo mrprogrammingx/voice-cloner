@@ -23,3 +23,6 @@ output/*
 *.wav
 *.mp3
 *.log
+.venv-test/
+requirements.backup.txt
+requirements.candidate.txt

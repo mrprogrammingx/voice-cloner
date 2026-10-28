@@ -102,7 +102,7 @@ def test_batch_loads_model_once_and_continues_after_failure(patched_model, tmp_p
     (folder / "c_good.txt").write_text("Three.")
     code = main(args(voice_wav, "--batch-dir", str(folder), "--output-dir", str(tmp_path / "o")))
     assert code == 1  # one script failed
-    assert loads == ["vc"] or len(loads) == 1
+    assert len(loads) == 1  # model loaded once for the whole batch
     assert len(list((tmp_path / "o").glob("a_good_*.wav"))) == 1
     assert len(list((tmp_path / "o").glob("c_good_*.wav"))) == 1
     assert not list((tmp_path / "o").glob("b_empty_*.wav"))
