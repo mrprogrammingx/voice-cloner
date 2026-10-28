@@ -83,3 +83,20 @@ def convert_to_wav(src: str | Path, dst: str | Path, start: float = 0.0, duratio
     except subprocess.CalledProcessError as exc:
         raise AudioError(f"ffmpeg failed: {exc.stderr.strip()}") from exc
     return dst
+
+
+def export_mp3(wav_path: str | Path, mp3_path: str | Path, bitrate: str = "192k") -> Path:
+    """Convert a WAV to MP3 with ffmpeg (libmp3lame)."""
+    wav_path, mp3_path = Path(wav_path), Path(mp3_path)
+    if not wav_path.is_file():
+        raise AudioError(f"Input not found: {wav_path}")
+    mp3_path.parent.mkdir(parents=True, exist_ok=True)
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
+           "-codec:a", "libmp3lame", "-b:a", bitrate, str(mp3_path)]
+    try:
+        subprocess.run(cmd, check=True, capture_output=True, text=True)
+    except FileNotFoundError as exc:
+        raise AudioError("ffmpeg is not installed or not on PATH.") from exc
+    except subprocess.CalledProcessError as exc:
+        raise AudioError(f"ffmpeg failed: {exc.stderr.strip()}") from exc
+    return mp3_path

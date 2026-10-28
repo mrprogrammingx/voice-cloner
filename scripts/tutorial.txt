@@ -1,0 +1,5 @@
+Welcome to this tutorial on building a Python API. Today we will use PostgreSQL to store our data.
+
+First, we define a function called `get_user_name`. It takes a user ID and returns the name from the database. We call it with `await`, because our code is async.
+
+Finally, we deploy the app behind nginx. That is all for this lesson, thanks for watching.
