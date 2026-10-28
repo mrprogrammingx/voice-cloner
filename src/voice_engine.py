@@ -8,7 +8,7 @@ os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 import torch
 import torchaudio as ta
 
-MODEL_KINDS = ("turbo", "original")
+MODEL_KINDS = ("turbo", "original", "vc")
 
 
 class VoiceEngineError(Exception):
@@ -35,6 +35,10 @@ def load_model(kind: str = "turbo", device: str | None = None):
 
     torch.load = patched_load
     try:
+        if kind == "vc":
+            from .vc_engine import VCBundle
+
+            return VCBundle.load(device)
         if kind == "turbo":
             from chatterbox.tts_turbo import ChatterboxTurboTTS as Model
         else:

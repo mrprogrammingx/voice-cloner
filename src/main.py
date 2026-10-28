@@ -20,7 +20,7 @@ def parse_args(argv=None):
     src.add_argument("--text", help="Script text")
     src.add_argument("--text-file", help="Path to a UTF-8 text file with the script")
     p.add_argument("--output", default="output/narration.wav", help="Output WAV path")
-    p.add_argument("--model", choices=MODEL_KINDS, default="turbo")
+    p.add_argument("--model", choices=MODEL_KINDS, default="vc")
     p.add_argument("--seed", type=int, default=1, help="Base random seed (default 1)")
     p.add_argument("--pronunciations", default="pronunciations.json")
     p.add_argument("--max-chars", type=int, default=250, help="Split sentences longer than this")
