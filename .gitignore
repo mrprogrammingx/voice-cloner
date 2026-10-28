@@ -1,0 +1,25 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Private voice recordings (keep the folder, not the contents)
+samples/*
+!samples/.gitkeep
+
+# Model weights and caches
+models/*
+!models/.gitkeep
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+
+# Generated audio and logs
+output/*
+!output/.gitkeep
+*.wav
+*.mp3
+*.log
