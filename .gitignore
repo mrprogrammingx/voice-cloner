@@ -26,3 +26,6 @@ output/*
 .venv-test/
 requirements.backup.txt
 requirements.candidate.txt
+video/
+*.mov
+*.mp4
